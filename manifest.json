@@ -1,50 +1,50 @@
-{
-    "manifest_version": 3,
-    "name": "Carbon Switch — Green Hotel Booking",
-    "short_name": "Carbon Switch",
+  {
+    "manifest_version": 3,                                                                                     
+    "name": "Carbon Switch - Green Hotel Booking",          
+    "short_name": "Carbon Switch",                                                                             
     "version": "1.0.0",
-    "description": "description": "Every hotel on Booking.com, Expedia or Hotels.com can be booked on IMPT instead - same     
-  price, 1 ton of CO2 removed. Zero extra cost.",
-    "icons": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    },
-    "content_scripts": [
+    "description": "Book the same hotel on IMPT instead of Booking.com - same price, 1 ton of CO2 removed on   
+  every booking. Zero extra cost.",                                                                            
+    "icons": {                                                                                               
+      "16": "icons/icon16.png",                                                                                
+      "48": "icons/icon48.png",                             
+      "128": "icons/icon128.png"                                                                               
+    },                                                      
+    "content_scripts": [                                                                                     
       {
         "matches": [
-          "*://*.booking.com/hotel/*",
+          "*://*.booking.com/hotel/*",                                                                         
           "*://*.booking.com/searchresults*",
-          "*://*.expedia.com/*/Hotel-Search*",
-          "*://*.expedia.co.uk/*/Hotel-Search*",
-          "*://*.hotels.com/search*",
-          "*://*.hotels.com/ho*",
-          "*://*.airbnb.com/rooms/*",
-          "*://*.airbnb.com/s/*/homes*",
-          "*://*.tripadvisor.com/Hotel_Review*",
-          "*://*.tripadvisor.co.uk/Hotel_Review*"
-        ],
-        "js": ["content.js"],
-        "css": ["content.css"],
-        "run_at": "document_idle"
-      }
+          "*://*.expedia.com/*/Hotel-Search*",                                                                 
+          "*://*.expedia.co.uk/*/Hotel-Search*",                                                               
+          "*://*.hotels.com/search*",                                                                        
+          "*://*.hotels.com/ho*",                                                                              
+          "*://*.airbnb.com/rooms/*",                       
+          "*://*.airbnb.com/s/*/homes*",                                                                       
+          "*://*.tripadvisor.com/Hotel_Review*",                                                               
+          "*://*.tripadvisor.co.uk/Hotel_Review*"                                                            
+        ],                                                                                                     
+        "js": ["content.js"],                               
+        "css": ["content.css"],                                                                                
+        "run_at": "document_idle"                           
+      }                                                                                                        
     ],
-    "action": {
-      "default_popup": "popup.html",
-      "default_title": "Carbon Switch — Book Green",
-      "default_icon": {
+    "action": {                                                                                                
+      "default_popup": "popup.html",                        
+      "default_title": "Carbon Switch - Book Green",                                                         
+      "default_icon": {                                                                                        
         "16": "icons/icon16.png",
-        "48": "icons/icon48.png"
-      }
-    },
+        "48": "icons/icon48.png"                                                                               
+      }                                                     
+    },                                                                                                       
     "permissions": [],
-    "host_permissions": [
+    "host_permissions": [                                                                                      
       "*://*.booking.com/*",
-      "*://*.expedia.com/*",
-      "*://*.expedia.co.uk/*",
-      "*://*.hotels.com/*",
+      "*://*.expedia.com/*",                                                                                   
+      "*://*.expedia.co.uk/*",                              
+      "*://*.hotels.com/*",                                                                                  
       "*://*.airbnb.com/*",
-      "*://*.tripadvisor.com/*",
+      "*://*.tripadvisor.com/*",                                                                               
       "*://*.tripadvisor.co.uk/*"
-    ]
+    ]                                                                                                          
   }
