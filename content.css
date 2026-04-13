@@ -1,0 +1,95 @@
+(function () {
+    'use strict';
+    if (document.getElementById('carbon-switch-banner')) return;
+
+    function detectHotel() {
+      const host = window.location.hostname;
+      const path = window.location.pathname;
+      const url  = window.location.href;
+      let hotelName = '', cityName = '', isHotelPage = false;
+
+      if (host.includes('booking.com')) {
+        if (path.includes('/hotel/')) {
+          isHotelPage = true;
+          const h = document.querySelector('h2.pp-header__title, [data-testid="property-header-title"] h1,
+  h1');
+          hotelName = h ? h.textContent.trim() : document.title.split(':')[0].trim();
+          const m = url.match(/booking\.com\/hotel\/[a-z]{2}\/([a-z-]+)/i);
+          cityName = m ? m[1].split('-')[0].replace(/\b\w/g,c=>c.toUpperCase()) : '';
+        } else if (url.includes('searchresults')) {
+          isHotelPage = true;
+          cityName = new URLSearchParams(window.location.search).get('ss') || '';
+        }
+      } else if (host.includes('expedia.')) {
+        if (path.match(/Hotel-Search/) || path.includes('/Hotels/')) {
+          isHotelPage = true;
+          cityName = new URLSearchParams(window.location.search).get('destination') || '';
+        }
+      } else if (host.includes('hotels.com')) {
+        isHotelPage = true;
+        const h = document.querySelector('h1');
+        hotelName = h ? h.textContent.trim() : '';
+        cityName = new URLSearchParams(window.location.search).get('q-destination') || '';
+      } else if (host.includes('airbnb.com')) {
+        if (path.startsWith('/rooms/')) {
+          isHotelPage = true;
+          const h = document.querySelector('h1');
+          hotelName = h ? h.textContent.trim() : 'this property';
+        }
+      } else if (host.includes('tripadvisor.')) {
+        if (path.includes('/Hotel_Review')) {
+          isHotelPage = true;
+          const h = document.querySelector('h1');
+          hotelName = h ? h.textContent.trim() : document.title.split('-')[0].trim();
+        }
+      }
+      return { isHotelPage, hotelName: hotelName.substring(0,80).trim(), cityName:
+  cityName.substring(0,60).trim() };
+    }
+
+    function buildImptUrl(hotelName, cityName) {
+      if (cityName) return 'https://app.impt.io/travel/hotels?locationName=' + encodeURIComponent(cityName);
+      if (hotelName) return 'https://impt.io/hotels/?s=' + encodeURIComponent(hotelName);
+      return 'https://app.impt.io/travel/hotels';
+    }
+
+    function esc(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function injectBanner(hotelName, cityName) {
+      const url = buildImptUrl(hotelName, cityName);
+      const label = hotelName ? '<strong>' + esc(hotelName) + '</strong>'
+                  : cityName  ? 'hotels in <strong>' + esc(cityName) + '</strong>'
+                  : 'this hotel';
+      const b = document.createElement('div');
+      b.id = 'carbon-switch-banner';
+      b.innerHTML = '<div id="csb-inner"><div id="csb-leaf">🌿</div><div id="csb-text"><div id="csb-main">Book
+  ' + label + ' on <strong>IMPT</strong> — same price, <strong>1 ton of CO₂ removed</strong></div><div
+  id="csb-sub">UN-verified carbon removal · zero extra cost · free cancellation</div></div><div
+  id="csb-actions"><a id="csb-cta" href="' + esc(url) + '" target="_blank" rel="noopener">Book on IMPT
+  →</a><button id="csb-close" aria-label="Dismiss">✕</button></div></div>';
+      document.body.appendChild(b);
+      requestAnimationFrame(() => requestAnimationFrame(() => b.classList.add('csb-visible')));
+      document.getElementById('csb-close').addEventListener('click', function() {
+        b.classList.remove('csb-visible');
+        setTimeout(() => b.remove(), 300);
+        try { sessionStorage.setItem('csb-dismissed','1'); } catch(e){}
+      });
+    }
+
+    function init() {
+      try { if (sessionStorage.getItem('csb-dismissed')==='1') return; } catch(e){}
+      const { isHotelPage, hotelName, cityName } = detectHotel();
+      if (!isHotelPage) return;
+      setTimeout(() => { if (!document.getElementById('carbon-switch-banner')) injectBanner(hotelName,
+  cityName); }, 1500);
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+
+    let lastUrl = location.href;
+    new MutationObserver(() => { if (location.href !== lastUrl) { lastUrl = location.href; setTimeout(init,
+  2000); } }).observe(document, {subtree:true,childList:true});
+  })();
