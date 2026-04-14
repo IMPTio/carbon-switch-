@@ -3,8 +3,8 @@
     "name": "Carbon Switch — Green Hotel Booking",                                                             
     "short_name": "Carbon Switch",
     "version": "1.0.0",                                                                                        
-    "description": "Every hotel you find on Booking.com, Expedia, or Hotels.com can be booked on IMPT instead —
-   same price, 1 ton of CO₂ removed. Zero extra cost.",                                                        
+      "description": "Every hotel you find on Booking.com, Expedia, or Hotels.com can be booked on IMPT instead —
+  same price, 1 ton of CO₂ removed. Zero extra cost.",                                                        
     "icons": {
       "16": "icons/icon16.png",                                                                                
       "48": "icons/icon48.png",                                                                                
