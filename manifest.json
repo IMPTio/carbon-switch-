@@ -1,4 +1,4 @@
-  {
+ {
   "manifest_version": 3,
   "name": "Carbon Switch - Green Hotel Booking",
   "short_name": "Carbon Switch",
@@ -9,6 +9,29 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.booking.com/*",
+    "*://*.expedia.com/*",
+    "*://*.expedia.co.uk/*",
+    "*://*.hotels.com/*",
+    "*://*.airbnb.com/*",
+    "*://*.tripadvisor.com/*",
+    "*://*.tripadvisor.co.uk/*",
+    "*://*.kayak.com/*",
+    "*://*.kayak.co.uk/*",
+    "*://*.agoda.com/*",
+    "*://*.priceline.com/*",
+    "*://*.google.com/*",
+    "*://*.hilton.com/*",
+    "*://*.marriott.com/*",
+    "*://*.ihg.com/*",
+    "https://api.impt.io/*"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -21,7 +44,20 @@
         "*://*.airbnb.com/rooms/*",
         "*://*.airbnb.com/s/*/homes*",
         "*://*.tripadvisor.com/Hotel_Review*",
-        "*://*.tripadvisor.co.uk/Hotel_Review*"
+        "*://*.tripadvisor.co.uk/Hotel_Review*",
+        "*://*.kayak.com/hotels*",
+        "*://*.kayak.co.uk/hotels*",
+        "*://*.agoda.com/*/hotel/*",
+        "*://*.agoda.com/en-us/hotel/*",
+        "*://*.priceline.com/hotel/*",
+        "*://*.priceline.com/relax/hotel/*",
+        "*://www.google.com/travel/hotels*",
+        "*://*.hilton.com/en/hotels/*",
+        "*://*.hilton.com/en/book/*",
+        "*://*.marriott.com/hotels/hotel-rooms/*",
+        "*://*.marriott.com/search/findHotels*",
+        "*://*.ihg.com/hotels/*/hotel/*",
+        "*://*.ihg.com/hotels/*/search*"
       ],
       "js": [
         "content.js"
@@ -39,15 +75,5 @@
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"
     }
-  },
-  "permissions": [],
-  "host_permissions": [
-    "*://*.booking.com/*",
-    "*://*.expedia.com/*",
-    "*://*.expedia.co.uk/*",
-    "*://*.hotels.com/*",
-    "*://*.airbnb.com/*",
-    "*://*.tripadvisor.com/*",
-    "*://*.tripadvisor.co.uk/*"
-  ]
+  }
 }
