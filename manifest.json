@@ -3,7 +3,7 @@
   "name": "Carbon Switch — Green Hotel Booking",
   "short_name": "Carbon Switch",
   "version": "1.0.0",
-  "description": "Book hotels and offset your carbon footprint automatically. Works across Booking.com, Expedia, Airbnb and hundreds more travel sites.",
+  "description": "Book hotels, offset your carbon footprint automatically. Works across Booking.com, Expedia, Airbnb and more.",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
